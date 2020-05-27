@@ -26,12 +26,13 @@ class BotHandler:
         if len(get_result) > 0:
             last_update = get_result[-1]
         else:
-            last_update = get_result[len(get_result)]
+            last_update = None
 
         return last_update
 
 
-greet_bot = BotHandler('1287773885:AAHbzkZtlqr-CDruW37t5y565-JhF6LHQac')
+token = '1287773885:AAHbzkZtlqr-CDruW37t5y565-JhF6LHQac'
+greet_bot = BotHandler(token)
 greetings = ('здравствуй', 'привет', 'ку', 'здорово')
 now = datetime.datetime.now()
 
@@ -45,6 +46,9 @@ def main():
         greet_bot.get_updates(new_offset)
 
         last_update = greet_bot.get_last_update()
+
+        if last_update is None:
+            continue
 
         last_update_id = last_update['update_id']
         last_chat_text = last_update['message']['text']
